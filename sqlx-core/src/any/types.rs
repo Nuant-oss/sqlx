@@ -32,6 +32,11 @@ impl_any_type!(f64);
 impl_any_type!(str);
 impl_any_type!(String);
 
+#[cfg(all(feature = "bigdecimal", not(any(feature = "sqlite", feature="mssql"))))]
+impl_any_type!(bigdecimal::BigDecimal);
+#[cfg(all(feature = "decimal", not(any(feature = "sqlite", feature="mssql"))))]
+impl_any_type!(rust_decimal::Decimal);
+
 // Encode
 
 impl_any_encode!(bool);
@@ -46,6 +51,11 @@ impl_any_encode!(f64);
 impl_any_encode!(&'q str);
 impl_any_encode!(String);
 
+#[cfg(all(feature = "bigdecimal", not(any(feature = "sqlite", feature="mssql"))))]
+impl_any_encode!(bigdecimal::BigDecimal);
+#[cfg(all(feature = "decimal", not(any(feature = "sqlite", feature="mssql"))))]
+impl_any_encode!(rust_decimal::Decimal);
+
 // Decode
 
 impl_any_decode!(bool);
@@ -59,6 +69,11 @@ impl_any_decode!(f64);
 
 impl_any_decode!(&'r str);
 impl_any_decode!(String);
+
+#[cfg(all(feature = "bigdecimal", not(any(feature = "sqlite", feature="mssql"))))]
+impl_any_decode!(bigdecimal::BigDecimal);
+#[cfg(all(feature = "decimal", not(any(feature = "sqlite", feature="mssql"))))]
+impl_any_decode!(rust_decimal::Decimal);
 
 // Conversions for Blob SQL types
 // Type
